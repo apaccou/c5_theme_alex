@@ -1,0 +1,1 @@
+<?php //affichage du flux RSS des blocks de type 'actualite' de l'area Main et des Layouts de cette zone géré par le controller, voir /controller/rss.php ?>
