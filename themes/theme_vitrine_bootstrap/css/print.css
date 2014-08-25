@@ -1,0 +1,47 @@
+/* Supprimer la navigation */
+#header-wrap,
+.carousel,
+.content-col-left,
+.content-col-right,
+#footer-wrap {
+	display: none;
+}
+/* Augmenter la largeur du texte à lire */
+.content-col-main {
+    width: 100%;
+    margin: 0;
+    float: none;
+}
+/* Remettre les backgrounds aux valeurs par défaut */
+body {
+    background: white;
+}
+.content-col-main {
+    background: transparent;
+}
+/* Remettre la couleur des textes par défaut */
+.content-col-main {
+    color: #111;
+}
+/* Afficher la destination des liens */
+a:link:after {
+    content: " (" attr(href) ") ";
+}
+/* Faites ressortir des liens présents dans le texte */
+a:link {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #06c;
+}
+/* Utiliser des tailles de polices cohérentes avec une imprimante */
+p {
+    font-size: 12pt;
+}
+/* Modifier les polices de caractère */
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+}
+/* Penser à gérer l’affichage des commentaires s’ils sont nombreux */
+#comments {
+    page-break-before: always;
+}

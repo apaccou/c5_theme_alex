@@ -1,0 +1,33 @@
+http://www.ponypolo.fr/
+http://www.restaurant-lameredenis.fr/
+http://blog.1001menus.com/
+http://blog.1001menus.com/2014/04/lumih-choisit-1001menus-partenaire-exclusif-aider-les-restaurants-etre-plus-visible-sur-internet/
+http://www.sources-caudalie.com/
+                            
+<div itemscope itemtype="http://schema.org/Restaurant">
+  <span itemprop="name">GreatFood</span>
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span itemprop="ratingValue">4</span> stars -
+    based on <span itemprop="reviewCount">250</span> reviews
+  </div>
+  <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+    <span itemprop="streetAddress">1901 Lemur Ave</span>
+    <span itemprop="addressLocality">Sunnyvale</span>,
+    <span itemprop="addressRegion">CA</span> <span itemprop="postalCode">94086</span>
+  </div>
+  <span itemprop="telephone">(408) 714-1489</span>
+  <a itemprop="url" href="http://www.dishdash.com">www.greatfood.com</a>
+  Hours:
+  <meta itemprop="openingHours" content="Mo-Sa 11:00-14:30">Mon-Sat 11am - 2:30pm
+  <meta itemprop="openingHours" content="Mo-Th 17:00-21:30">Mon-Thu 5pm - 9:30pm
+  <meta itemprop="openingHours" content="Fr-Sa 17:00-22:00">Fri-Sat 5pm - 10:00pm
+  Categories:
+  <span itemprop="servesCuisine">
+    Middle Eastern
+  </span>,
+  <span itemprop="servesCuisine">
+    Mediterranean
+  </span>
+  Price Range: <span itemprop="priceRange">$$</span>
+  Takes Reservations: Yes
+</div> 
