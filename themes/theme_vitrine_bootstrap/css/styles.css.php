@@ -17,7 +17,7 @@ if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') && !is_buggy_IE()) ob
 else ob_start();
 
 $files = array(
-    'vendor/bootstrap-3.1.1.min.css', //==> pas possible de charger en CDN les mixins ne marchent pas sinon + fallback délicat
+    'vendor/bootstrap-3.3.1.min.css', //==> pas possible de charger en CDN les mixins ne marchent pas sinon + fallback délicat
     'vendor/lightbox.css',
     'css3_mixins.css',
     'application.css',
@@ -69,28 +69,28 @@ if (! $recache && isset ( $_SERVER ['If-Modified-Since'] ) && strtotime ( $_SERV
 	header ( 'Last-Modified: ' . gmdate ( "D, d M Y H:i:s", $time ) . " GMT" );
 
 	if ($recache) {
-	   
+
 		$css = '';
 
 		foreach ( $files as $file ) {
 			$css .= file_get_contents ( $file );
-		}    
-           
+		}
+
 		require 'lessc.inc.php';
 		$less = new lessc();
 		echo 'Cache : ' . ENABLE_OVERRIDE_CACHE ;
 		if ( defined('ENABLE_OVERRIDE_CACHE') ) {
 			$less->setFormatter("compressed");//actif en production
 		} else {
-			$less->setFormatter("classic");//actif en développement	
-		}                        
+			$less->setFormatter("classic");//actif en développement
+		}
 		$css = $less->compile($css);
 		if ( defined('ENABLE_OVERRIDE_CACHE') ) {
 			$css = minifyCSS($css);//actif en production pour compresser encore plus
 		}
 		file_put_contents ( $cache, $css );
         echo $css;
-        
+
 	} else {
 		readfile ( $cache );
 	}

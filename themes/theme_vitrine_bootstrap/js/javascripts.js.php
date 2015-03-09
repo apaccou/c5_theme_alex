@@ -13,15 +13,16 @@ function is_buggy_IE() {
 	return $ret;
 }
 
-if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') && !is_buggy_IE()) ob_start("ob_gzhandler");  
+if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') && !is_buggy_IE()) ob_start("ob_gzhandler");
 else ob_start();
 
-$files = array(    
+$files = array(
     'vendor/modernizr-2.7.2.custom.min.js',
     'vendor/lightbox-2.7.1.min.js',
     'vendor/jquery.carouFredSel-6.2.1-packed.js',
+		'isotope.pkgd.min.js',
 	//'externe_blank.js',
-	'application.js',   
+	'application.js',
 );
 
 $cache = 'cache.js';
@@ -30,7 +31,7 @@ $time = mktime ( 0, 0, 0, 21, 5, 1980 );
 
 foreach ( $files as $file ) {
 	$fileTime = filemtime ( $file );
-	
+
 	if ($fileTime > $time) {
 		$time = $fileTime;
 	}
@@ -53,19 +54,19 @@ if (! $recache && isset ( $_SERVER ['If-Modified-Since'] ) && strtotime ( $_SERV
 } else {
 	header ( 'Content-type: application/javascript' );
 	header ( 'Last-Modified: ' . gmdate ( "D, d M Y H:i:s", $time ) . " GMT" );
-	
+
 	if ($recache) {
-				
+
 		$js = '';
-		
+
 		foreach ( $files as $file ) {
 			$js .= file_get_contents ( $file );
 		}
-		
+
 		file_put_contents ( $cache, $js );
 		echo $js;
 	} else {
 		readfile ( $cache );
 	}
-}  
- ?>  
+}
+ ?>
