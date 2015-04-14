@@ -1,6 +1,6 @@
 <?php
 defined('C5_EXECUTE') or die(_("Access Denied."));
-$includeAssetLibrary = true; 
+$includeAssetLibrary = true;
 $assetLibraryPassThru = array(
 	'type' => 'image'
 );
@@ -8,6 +8,8 @@ $al = Loader::helper('concrete/asset_library');
 
 $bf = null;
 $bfo = null;
+
+Loader::element('editor_config');//pour le chargement de tinyMCE dans les blocks textarea avec la classe ccm-advanced-editor
 
 echo '<div class="ccm-block-field-group">';
 echo '<h4>'.t('Titre').'</h4>';
@@ -29,7 +31,7 @@ echo '</div>';
 ?>
 <div class="clearfix">
 	<?php echo $form->label('altText', t('Alt Text/Caption'))?>
-	<div class="input">	
+	<div class="input">
 		<?php echo $form->text('altText', $altText, array('style' => 'width: 250px')); ?>
 	</div>
 </div>
@@ -37,7 +39,7 @@ echo '</div>';
 <?php
 echo '<div class="ccm-block-field-group">';
 echo '<h4>'.t('Description').'</h4>';
-echo $form->textarea('description', $description, array('style' => 'width:550px'));
+echo $form->textarea('description', $description, array('style' => 'width:550px', 'class' => 'ccm-advanced-editor'));
 echo '</div>';
 ?>
 
@@ -46,7 +48,7 @@ echo '</div>';
 
 <div class="clearfix">
 	<?php echo $form->label('linkType', t('Image Links to:'))?>
-	<div class="input">	
+	<div class="input">
 		<select name="linkType" id="linkType">
 			<option value="0" <?php echo (empty($externalLink) && empty($internalLinkCID) ? 'selected="selected"' : '')?>><?php echo t('Nothing')?></option>
 			<option value="1" <?php echo (empty($externalLink) && !empty($internalLinkCID) ? 'selected="selected"' : '')?>><?php echo t('Another Page')?></option>

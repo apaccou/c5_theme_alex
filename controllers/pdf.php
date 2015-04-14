@@ -5,19 +5,22 @@ class PdfController extends Controller {
 
 	private $default_page_ID = 1;
 
-	public function view($page_ID = 193) {
+	public function view($page_ID = 1) {
 
+      //vérification si un ID a été passé et si une page correspond à cet ID
     	$page = Page::getByID($page_ID, 'ACTIVE');
     	if($page->isError()) {
     		$page = Page::getByID($this->default_page_ID, 'ACTIVE');
     		$page_ID = $this->default_page_ID;
     	}
+      //ajout des Area dont les blocks doivent être repris dans le PDF
     	$blocksInArea = $page->getBlocks('Main');
     	$blocksInArea_2 = $page->getBlocks('Main_deux');
     	$blocksInArea_3 = $page->getBlocks('Main_trois');
     	$blocksInArea = array_merge($blocksInArea, $blocksInArea_2, $blocksInArea_3);
     	
-    	$blocksInLayout = array();
+      //par défaut les blocs des Area qui sont contenues dans un Layout ne sont pas repris, on les ajoute donc pour l'Area Main
+  	   $blocksInLayout = array();
 		$area = new Area('Main');
 		$layouts = $area->getAreaLayouts($page); //returns empty array if no layouts
 		if ($layouts) {

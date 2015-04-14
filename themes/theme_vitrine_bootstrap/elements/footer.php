@@ -1,25 +1,25 @@
 <?php defined('C5_EXECUTE') or die(_("Access Denied.")); ?>
 
     <div id="footer-wrap" role="contentinfo">
-        <div id="footer-top">            
+        <div id="footer-top">
             <div class="container">
                 <p>[footer top]</p>
                 <a id="back-to-top" href="#top"><i class="fa fa-chevron-circle-up"></i></a>
-                
+
                 <div class="row">
                     <div class="col-md-3">
-                    
+
                         <!-- http://schema.org/PostalAddress    https://support.google.com/webmasters/answer/146861?hl=fr -->
                         <div class="vcard" itemscope itemtype="http://schema.org/Organization">
                             <h4><span class="org" itemprop="name"><a class="fn org url" itemprop="url" href="http://www.coteo.com">Agence Web COTEO</a></span></h4>
-                            
+
                             <p class="adr" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
                                 <span class="street-address" itemprop="streetAddress">2 rue des quatre coins</span><br />
                                 <span class="postal-code" itemprop="postalCode">62100</span>
-                                <span class="locality" itemprop="addressLocality">Calais</span><br />                                
+                                <span class="locality" itemprop="addressLocality">Calais</span><br />
                                 <span class="country-name" itemprop="addressCountry">France</span> &gt;
                                 <span class="region" itemprop="addressRegion">Nord Pas-de-Calais</span>
-                                
+
                             </p>
                             <p>
                                 <span class="tel">Tel:<span class="value" itemprop="telephone">( 33 3) 21 19 79 79 </span></span><br />
@@ -51,13 +51,13 @@
 
 
 
-                       
-                               
+
+
                     </div>
                     <div class="col-md-9">
                         <div class="row">
                             <div class="col-md-3">
-                                <h4>Titre h4</h4>                     
+                                <h4>Titre h4</h4>
                                 <ul class="elsewhere">
                                     <li><a rel="me" href="http://flickr.com/photos/paulrobertlloyd" class="flickr">Flickr</a></li>
                                     <li><a rel="me" href="http://dribbble.com/paulrobertlloyd" class="dribbble" data-icon="&#xe003;">Dribbble</a></li>
@@ -65,14 +65,14 @@
                                     <li><a rel="me" href="http://paulrobertlloyd.com/feeds" class="feeds" data-icon="&#xe001;">Feeds</a></li>
                                 </ul>
                             </div>
-                            <div class="col-md-3">                           
-                            </div>
                             <div class="col-md-3">
                             </div>
                             <div class="col-md-3">
-                            </div> 
+                            </div>
+                            <div class="col-md-3">
+                            </div>
                         </div>
-                    </div>                                   
+                    </div>
                 </div>
             </div>
         </div><!--/ #footer-top -->
@@ -82,29 +82,37 @@
                     <!--<p>[footer bottom]</p>-->
                     <p class="">
                         <i class="fa fa-sitemap"></i> <a href="<?php echo $this->url('/'); ?>">Plan du site</a> &bull; <a href="<?php echo $this->url('/mentions-legales/'); ?>">Mentions légales</a> &copy; 2014 <a rel="license" href="http://www.coteo.com/"><abbr title="Conception, Intégration et Développement de site internet Concrete5">Agence</abbr> Web COTEO <img src="<?php echo $this->getThemePath(); ?>/images/logo-coteo-web.png" alt="Coteo Web - Création de site internet" /></a>
-                    </p>                                  
+                    </p>
                 </div>
             </div>
-            <?php             
+            <?php
             ini_set('xdebug.var_display_max_depth', 5);
             ini_set('xdebug.var_display_max_children', 512);
             ini_set('xdebug.var_display_max_data', 2048);
             //var_dump( get_defined_vars() );
             //var_dump( get_defined_constants(true) );
             //var_dump( get_defined_functions() );
-            //var_dump( get_declared_classes() );             
+            //var_dump( get_declared_classes() );
             //var_dump( get_declared_interfaces() );
 
             $gdc = get_defined_constants(true);
             //var_dump( $gdc['user'] );
             ?>
-        </div><!--/ #footer-bottom -->        
+        </div><!--/ #footer-bottom -->
     </div><!--/ #footer-wrap -->
 </div><!--/ .page -->
 
 <!-- Bootstrap -->
-<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script>window.jQuery.fn.modal || document.write('<script src="<?= $this->getThemePath(); ?>/js/vendor/bootstrap-3.0.3.min.js"><\/script>')</script>
+<?php
+//désactivé en admin
+$u = new User();
+if ( !$u->isRegistered() ) {
+?>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script>window.jQuery.fn.modal || document.write('<script src="<?= $this->getThemePath(); ?>/js/vendor/bootstrap-3.3.1.min.js"><\/script>')</script>
+<?php
+}
+?>
 
 <script type="text/javascript" src="<?= $this->getThemePath(); ?>/js/javascripts.js.php"></script>
 
@@ -120,7 +128,7 @@
 			pauseOnHover: true
 		});
 	});
-} ) ( jQuery );	
+} ) ( jQuery );
 </script>
 
 <?php Loader::element('footer_required'); ?>

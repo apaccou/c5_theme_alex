@@ -12,22 +12,22 @@ if(is_object($p) && $p instanceof Page && !$p->isError() && $p->getCollectionID(
 <!--[if lt IE 7 ]> <html lang="fr" dir="ltr" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="fr" dir="ltr" class="no-js ie7"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="fr" dir="ltr" class="no-js ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="fr" dir="ltr" class="no-js ie9"> <![endif]-->   
+<!--[if IE 9 ]>    <html lang="fr" dir="ltr" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="fr-FR" dir="ltr" class="no-js"> <!--<![endif]-->
-<head>
-	<?php Loader::element('header_required'); ?>
-    
+<head>	
+	<?php Loader::element('header_required', array('pageTitle' => $pageTitle)); ?>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-	
-	<link rel="canonical" href="<?php echo $url; ?>" />    
-    
+
+	<link rel="canonical" href="<?php echo $url; ?>" />
+
 	<!-- Décommenter pour utiliser Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"  />
 
 	<link rel="stylesheet" href="<?php echo $this->getThemePath(); ?>/css/styles.css.php" type="text/css" media="screen,projection" />
-	
-	<!-- feuille de style pour les règles administrables en admin et les règles à inclure dans TinyMCE 
+
+	<!-- feuille de style pour les règles administrables en admin et les règles à inclure dans TinyMCE
 	<link rel="stylesheet" href="<?php echo $this->getThemePath(); ?>/typography.css" type="text/css" media="screen,projection" />
 	-->
 
@@ -35,25 +35,25 @@ if(is_object($p) && $p instanceof Page && !$p->isError() && $p->getCollectionID(
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <link rel="stylesheet" href="<?php echo $this->getThemePath(); ?>/css/print.css" type="text/css" media="print" />
     <![endif]-->
-    
+
 	<!-- jQuery chargé par header_required.php lorsque loggué pour éviter boggues avec v.1.11.0 -->
 	<?php global $u; if (!$u->isRegistered()) { ?>
 	<!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="<?= $this->getThemePath(); ?>/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>-->
-	<?php } ?>	
-	<!--<script type="text/javascript" src="<?= $this->getThemePath(); ?>/js/javascripts.js.php"></script> inclus en bas de page -->	
+	<?php } ?>
+	<!--<script type="text/javascript" src="<?= $this->getThemePath(); ?>/js/javascripts.js.php"></script> inclus en bas de page -->
 
 	<?php
 	//Pour l'utilisation d'un background paramétrable en admin
 
 	/* Ajouter manuellement l'attribut de page dans http://nddduclient.vega.coteo.com/dashboard/pages/attributes/ au format Image/File avec Identifiant unique = bg_image
 	/* le nom peut changer (mettre par défaut: Background Paramétrable) et décocher les deux cases en-dessous
-	/* Ajouter dans la balise souhaitée : style="background-image: url('<?php  echo $bg_image;?>');"		
+	/* Ajouter dans la balise souhaitée : style="background-image: url('<?php  echo $bg_image;?>');"
 
 	//si la page en cours a une image de background paramétrée on l'utilise
 	if ($c->getAttribute('bg_image')) {
 		$bg_image = $c->getAttribute('bg_image')->getVersion()->getRelativePath();
-	}			 
+	}
 	//sinon on utilise l'image de background par défault
 	else {
 		$bg_image = $this->getThemePath().'/images/bg_default.jpg';
@@ -70,13 +70,13 @@ if(is_object($p) && $p instanceof Page && !$p->isError() && $p->getCollectionID(
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-<div class="page"><!-- cette classe n'inclue pas l'éditeur en admin contrairement à celles dans body -->    
+<div class="page"><!-- cette classe n'inclue pas l'éditeur en admin contrairement à celles dans body -->
     <div id="header-wrap" role="banner">
 		<div id="header-top">
 			<div class="container">
 				<?php
 					$stack = Stack::getByName('Alerte');
-					if($stack) {					
+					if($stack) {
 						$stack->display();
 					}
 					if( $u->isRegistered() ) {
@@ -87,21 +87,21 @@ if(is_object($p) && $p instanceof Page && !$p->isError() && $p->getCollectionID(
 					<li><i class="fa fa-phone"></i> 03 20 XX XX XX</li>
 					<li><a href="#" class="btn btn-default">Action 1</a></li>
 					<li><a href="#" class="btn btn-default">Action 2</a></li>
-				</ul>				
-				
+				</ul>
+
 				<ul id="" class="list-inline pull-right">
-					<li class="hidden-xs">		
+					<li class="hidden-xs">
 						<form action="<?php echo View::url('/recherche'); ?>" method="get" role="search" id="search">
 							<input name="search_paths[]" type="hidden" value="">
-		           			<input name="query" type="text" value="" class="text" placeholder="Rechercher">					        
+		           			<input name="query" type="text" value="" class="text" placeholder="Rechercher">
 					        <button type="submit" class="search"><i class="fa fa-search"></i><span class="sr-only">Ok</span></button>
 					    </form>
 				    </li>
 					<li><a href="#" class="">FR</a></li>
 					<li><a href="#" class="">EN</a></li>
 				</ul>
-							
-			</div>		
+
+			</div>
 		</div><!--/ #header-top -->
 		<div id="header-main">
 
@@ -131,7 +131,7 @@ if(is_object($p) && $p instanceof Page && !$p->isError() && $p->getCollectionID(
 		            $nav->controller->displaySubPageLevelsNum = 1;
 		            $nav->render('templates/bootstrap_menu');
 		            ?>
-    
+
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Link</a></li>
         <li><a href="#">Link</a></li>
@@ -186,12 +186,12 @@ if(is_object($p) && $p instanceof Page && !$p->isError() && $p->getCollectionID(
 	                        <span class="icon-bar"></span>
 	                    </button>
 	                    <?php
-	                    //test si page accueil pour optimisation SEO 	                    
+	                    //test si page accueil pour optimisation SEO
 	                    if($accueil)
-	                    {                     
+	                    {
 	                    ?>
-	                    <h1 id="logo-site" class="navbar-brand">			
-	                        <img id="" class="" width="50" height="50" alt="<?php echo SITE; ?>" src="<?php echo $this->getThemePath(); ?>/images/logo-coteo-web.png" />			
+	                    <h1 id="logo-site" class="navbar-brand">
+	                        <img id="" class="" width="50" height="50" alt="<?php echo SITE; ?>" src="<?php echo $this->getThemePath(); ?>/images/logo-coteo-web.png" />
 	                    </h1>
 	                    <?php
 	                    } else {
@@ -201,8 +201,8 @@ if(is_object($p) && $p instanceof Page && !$p->isError() && $p->getCollectionID(
 	                    </a>
 	                    <?php
 	                    }
-	                    ?>                
-	                </div> <!--/.navbar-header -->              
+	                    ?>
+	                </div> <!--/.navbar-header -->
 	            </div><!--/.navbar -->
 
 	            	</div>
@@ -216,7 +216,7 @@ if(is_object($p) && $p instanceof Page && !$p->isError() && $p->getCollectionID(
 	    <div id="header-bottom">
 	        <div class="container">
 	        	<nav class="collapse navbar-collapse" role="navigation">
-	                       
+
 	            <?php
 	            $nav = BlockType::getByHandle('autonav');
 	            $nav->controller->orderBy = 'display_asc';
@@ -225,9 +225,9 @@ if(is_object($p) && $p instanceof Page && !$p->isError() && $p->getCollectionID(
 	            $nav->controller->displaySubPageLevels = 'custom';
 	            $nav->controller->displaySubPageLevelsNum = 4;
 	            $nav->render('templates/bootstrap_menu');
-	            ?> 
+	            ?>
 
 				</nav>
 	        </div><!--/.container -->
-		</div><!--/ #header-bottom -->	
+		</div><!--/ #header-bottom -->
     </div><!--/ #header-wrap -->

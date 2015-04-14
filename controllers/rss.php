@@ -15,7 +15,7 @@ class RssController extends Controller {
     		$page_ID = $this->default_page_ID;
     	}
     	$blocksInArea = $page->getBlocks('Main');
-    	
+
     	$blocksInLayout = array();
 		$area = new Area('Main');
 		$layouts = $area->getAreaLayouts($page); //returns empty array if no layouts
@@ -43,26 +43,27 @@ class RssController extends Controller {
 	    $xml .= '           <lastBuildDate>'. date(DATE_RFC2822) .'</lastBuildDate>';
 	    $xml .= '           <language>fr-fr</language>';
 
-	    foreach($blocks as $block) {       
+	    foreach($blocks as $block) {
 
 	       $block = Block::getByID($block->bID);
 
 	       //charge uniquement dans le flux les blocs de type 'Actualite'
-	       if( $block->getBlockTypeName() == 'Actualite') {                
+	       if( $block->getBlockTypeName() == 'Actualite') {
 	            $xml .= '<item>';
 	            $xml .= '   <title>'. htmlspecialchars($block->getInstance()->title) .'</title>';
 	            $xml .= '   <link>'. BASE_URL . $nh->getLinkToCollection($page) .'</link>';
-	            $xml .= '   <description><![CDATA['. htmlspecialchars($block->getInstance()->description) .']]></description>';
+							$xml .= '   <description><![CDATA['. $block->getInstance()->description .']]></description>';//pour affichage HTML
+	            //$xml .= '   <description><![CDATA['. htmlspecialchars($block->getInstance()->description) .']]></description>';plus sur si le flux ne doit pas contenir de HTML
 	            $xml .= '   <pubDate>'. date('r', strtotime($block->bDateModified)) .'</pubDate>';
 	            $xml .= '   <guid isPermaLink="false">OfdtUniqueGuid'. $block->bID .'</guid>';
-	            $xml .= '</item>';  
-	       }       
-	       
-	    } 
-	    
+	            $xml .= '</item>';
+	       }
+
+	    }
+
 	    $xml .= '       </channel>';
 	    $xml .= '   </rss>';
-    
+
 	    header('Content-type: text/xml; charset=utf-8');
 	    echo $xml;
 	    exit;

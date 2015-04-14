@@ -1,4 +1,4 @@
-<?php 
+<?php
 	defined('C5_EXECUTE') or die("Access Denied.");
 /**
  * The controller for the Actualite block.
@@ -11,7 +11,7 @@
  *
  */
 	class ActualiteBlockController extends BlockController {
-	
+
 		protected $btTable = 'btActualite';
 		protected $btInterfaceWidth = "600";
 		protected $btInterfaceHeight = "400";
@@ -21,15 +21,15 @@
 		protected $btCacheBlockOutputForRegisteredUsers = true;
 		protected $btCacheBlockOutputLifetime = CACHE_LIFETIME;
 		//protected $btWrapperClass = 'ccm-ui';
-		
+
 		public function getBlockTypeDescription() {
 			return t("Bloc pour les actualités.");
 		}
-		
+
 		public function getBlockTypeName() {
 			return t("Actualite");
 		}
-		
+
 		//déclaration des variables public
 		//supprimer ces deux tests uniquement pour exemple $content et $source
 		//public $content = "";
@@ -43,10 +43,10 @@
 			   $this->cID = $c->getCollectionID();
 			   $this->cParentID = $c->getCollectionParentID();
 			}
-			
+
 			parent::__construct($obj);
 		}
-		
+
 		public function view(){
 			//$this->set('content', $this->content);
 			//$this->set('source', $this->source);
@@ -55,7 +55,7 @@
 		function getFileID() {return $this->fID;}
 		function getFileObject() {
 			return File::getByID($this->fID);
-		}		
+		}
 		function getAltText() {return $this->altText;}
 		function getExternalLink() {return $this->externalLink;}
 		function getInternalLinkCID() {return $this->internalLinkCID;}
@@ -78,20 +78,20 @@
 
 			parent::save($args);
 		}
-		
-/*		
+
+/*
 		function getContent() {
-			
+
 			$con = array();
 			foreach($this as $key => $value) {
 				$con[$key] = $value;
 			}
 			return $con;
 		}
-		
+
 		public function getChildPages($c) {
-		
-			
+
+
 			$db = Loader::db();
 			$r = $db->query("select cID from Pages where cParentID = ? order by cDisplayOrder asc", array($c->getCollectionID()));
 			$pages = array();
@@ -100,13 +100,13 @@
 			}
 			return $pages;
 		}
-	
+
 		function getParentParentID() {
 			// this has to be the stupidest name of a function I've ever created. sigh
 			$cParentID = Page::getCollectionParentIDFromChildID($this->cParentID);
 			return ($cParentID) ? $cParentID : 0;
 		}
-		
+
 */
 
 	}

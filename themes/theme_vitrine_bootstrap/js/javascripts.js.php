@@ -19,8 +19,7 @@ else ob_start();
 $files = array(
     'vendor/modernizr-2.7.2.custom.min.js',
     'vendor/lightbox-2.7.1.min.js',
-    'vendor/jquery.carouFredSel-6.2.1-packed.js',
-		'isotope.pkgd.min.js',
+    'vendor/jquery.carouFredSel-6.2.1-packed.js',		
 	//'externe_blank.js',
 	'application.js',
 );
