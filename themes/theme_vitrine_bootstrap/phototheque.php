@@ -4,31 +4,55 @@
 <h1>Photothèque</h1>
 <p>
   https://www.concrete5.org/documentation/developers/5.6/files/grouping-files-with-sets
-  <br/>
-  Gérer l'ordre ????
+  <br />
+  http://www.concrete5.org/documentation/developers/5.6/files/searching-and/
+  <br />
+  http://www.concrete5.org/documentation/developers/5.6/files/files-and-file-versions/
+  <br />
+  http://www.concrete5.org/documentation/developers/5.6/files/helpers/
+  <br />
+  http://www.frescojs.com/
 </p>
 
 
 <ul class="isotope list-galerie list-unstyled">
 <?php
+
 Loader::model('file_list');
 $fl = new FileList();
+
+  // Création du FileSet s'il n'existe pas encore
+
+  $attr_set = AttributeSet::getByHandle('phototheque');
+  if( !is_object($attr_set) ) {
+  	$akCat = AttributeKeyCategory::getByHandle('collection');
+  	$akCat->setAllowAttributeSets(AttributeKeyCategory::ASET_ALLOW_SINGLE);
+  	$akCatSet = $akCat->addSet('phototheque', t('Photothèque'), $pkg);
+  }
+
 $fs = FileSet::getByName('phototheque');
 $fl->filterBySet($fs);
-//penser à filtrer seulement sur les images ?
+//filtre sur les images. Penser à développer la gestion des vidéos et autres types de doc //$thumb_src = $this->getThemePath() .'/images/noimage.png';
+$fl->filterByType(FileType::T_IMAGE);
+//  Gérer l'ordre ????
+//$fl->sortByFileSetDisplayOrder();
 $files = $fl->get();
 
 $ih = Loader::helper('image');
-foreach ($files as $visuel) {
-  if (is_object($visuel)) {
-    $thumb = $ih->getThumbnail($visuel, 250, 500, false);
-    $thumb_url = $thumb->src;
-    //$thumb_src = $visuel->getRelativePath();
-    //$thumb_url = $visuel->getURL();
-  } else {
-    $thumb_url = $this->getThemePath() .'/images/noimage.png';
+foreach ($files as $f) {
+
+  if (is_object($f)) {
+    $fv = $f->getRecentVersion();
+    $level = 2;
+    if( $fv->getThumbnail($level) ) {
+      $thumb_src = $fv->getThumbnailSRC($level);
+    } else {
+      $thumb = $ih->getThumbnail($visuel, 250, 250, false);
+      $thumb_src = $thumb->src;
+    }
   }
-  echo '<li class="item"><a href="'. $visuel->getPath() .'"><img src="'. $visuel->getURL() .'"/></a></li>';
+  echo '<li class="item"><a href="'. $fv->getRelativePath() .'"><img src="'. $thumb_src .'" alt="'. $fv->getDescription() .'" /></a></li>';
+  //echo '<li class="item"><a href="'. $fv->getPath() .'"><img src="'. $fv->getURL() .'"/></a></li>';
 }
 ?>
 </ul>
@@ -39,10 +63,10 @@ foreach ($files as $visuel) {
 $( function() {
 
   $('.isotope').isotope({
-    itemSelector: '.item',
     masonry: {
-
-    }
+      gutter: 15
+    },
+    itemSelector: '.item',
   });
 
 });
